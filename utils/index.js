@@ -1,1 +1,1 @@
-export const getUrlParams = params => new URLSearchParams(Object.entries(params));
+export const getUrlParams = params => 'returnFaceAttributes=age,gender,headPose,smile,facialHair,glasses,emotion,hair,makeup,occlusion,accessories,blur,exposure,noise';
