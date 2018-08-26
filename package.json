@@ -6,7 +6,7 @@
   "scripts": {
     "start": "babel-node index.js",
     "dev": "nodemon index.js --exec babel-node",
-    "test": "mocha test/*.test.js --spec --timeout 5000 --exit --compilers js:babel-core/register",
+    "test": "mocha test/*.test.js --spec --timeout 10000 --exit --compilers js:babel-core/register",
     "test:nodemon": "nodemon test/value.test.js --exec mocha --compilers js:babel-core/register"
   },
   "license": "MIT",

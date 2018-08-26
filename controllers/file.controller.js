@@ -41,7 +41,6 @@ const UploadStorageFirebase = (files) => {
       })
 
       blobStream.on('error', error => {
-        console.log(error)
         _reject(error)
       })
 
@@ -51,8 +50,10 @@ const UploadStorageFirebase = (files) => {
         fileUpload.getSignedUrl({ action: 'read' })
         arrayFile.push({ url: url, type: file.mimetype, code: nameFile.toString() })
 
-        if (arrayFile.length == (files.length))
+        if (arrayFile.length == (files.length)){
           _resolve(arrayFile)
+        }
+         
 
       })
 
@@ -69,9 +70,9 @@ export default {
 
   verificationController: async (req, res) => {
     try {
-        const { imageUrl } = req.body;
-        const response = await verificationFace.requestFace({ imageUrl });
-        res.status(200).send(response);
+      const { imageUrl } = req.body;
+      const response = await verificationFace.requestFace({ imageUrl });
+      res.status(200).send(response);
     } catch (error) {
       console.log(error);
     }
@@ -82,10 +83,10 @@ export default {
     try {
 
       if (req.files.length > 0) {
-
         const response = await UploadStorageFirebase(req.files)
         const imageUrl = response[0].url
         const verification = await verificationFace.requestFace({ imageUrl });
+        console.log(verification)
         res.status(200).send(verification);
 
       }
