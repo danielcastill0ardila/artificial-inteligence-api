@@ -4,10 +4,6 @@ import fileController from '../controllers/file.controller'
 import { errors } from 'celebrate'
 
 export default (app) => {
-
   app.post('/api/verification',fileController.verificationController)
- 
-
   app.use(errors())
-
-}
+};
