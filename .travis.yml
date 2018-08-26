@@ -1,12 +1,13 @@
-language: node_js
-
-sudo: false
-
-node_js:
-  - "8.11.1"
-  
-install:
-  - npm install
-  
-script:
-  - npm run test
+matrix:
+  include:
+    - language: node_js
+      name: Upload Heroku [artificial-inteligence-project]
+      sudo: false
+      node_js:
+        - "8.11.1"
+      branches:
+        only:
+          - master
+      script:
+        # Add upload heroku logic...
+        - npm install
