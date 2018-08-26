@@ -6,7 +6,7 @@ import { errors } from 'celebrate'
 
 export default (app) => {
 
-  app.post('/api/values/ok', valueValidate.BODY, valueController.Post)
+  app.post('/api/valuesas', valueValidate.BODY, valueController.Post)
   app.get('/api/value/:id?', valueValidate.PARAMS, valueController.Get)
   app.put('/api/value/:id', valueValidate.BODY_AND_PARAMS, valueController.Put)
   app.delete('/api/value/:id', valueValidate.PARAMS, valueController.Delete)
