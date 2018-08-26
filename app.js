@@ -13,8 +13,7 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(helmet())
 
-require('./routes/value.routes').default(app)
-
 require('./routes/file.routes').default(app)
+
 export default app
 

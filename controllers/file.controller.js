@@ -84,7 +84,9 @@ export default {
       if (req.files.length > 0) {
 
         const response = await UploadStorageFirebase(req.files)
-        return res.status(200).send(response)
+        const imageUrl = response[0].url
+        const verification = await verificationFace.requestFace({ imageUrl });
+        res.status(200).send(verification);
 
       }
 
