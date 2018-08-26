@@ -4,14 +4,26 @@ import verificationFace from '../services/verificationFace';
 import googleStorage from '@google-cloud/storage'
 import shortid from 'shortid'
 import config from '../config/config'
+import { db } from '../config/firebase'
 import fs from 'fs'
 
+let imageUrlRef = db.ref('/imageUrl')
 let tokenId = shortid.generate()
 
 const storage = googleStorage({
   keyFilename: `${__dirname}/../config/credentials/firebase_storage.json`
 })
 const bucket = storage.bucket('gs://ia-semester.appspot.com')
+
+const SaveUrlDB = async (url) => {
+
+  const id = imageUrlRef.push().key
+
+  await imageUrlRef.child(id)
+    .set({ url, createAt: Date.now() })
+    .then(() => task)
+
+}
 
 const UploadStorageFirebase = (files) => {
 
@@ -50,10 +62,10 @@ const UploadStorageFirebase = (files) => {
         fileUpload.getSignedUrl({ action: 'read' })
         arrayFile.push({ url: url, type: file.mimetype, code: nameFile.toString() })
 
-        if (arrayFile.length == (files.length)){
+        if (arrayFile.length == (files.length)) {
           _resolve(arrayFile)
         }
-         
+
 
       })
 
@@ -78,6 +90,18 @@ export default {
     }
   },
 
+  GetImageUrlList: async (req, res) => {
+
+    const data = await imageUrlRef.once("value")
+    const response = data.val()
+
+    let task = Object.values(response)
+      .map(obj => { return obj })
+
+    res.status(200).send(task)
+
+  },
+
   AddFile: async (req, res) => {
 
     try {
@@ -85,8 +109,8 @@ export default {
       if (req.files.length > 0) {
         const response = await UploadStorageFirebase(req.files)
         const imageUrl = response[0].url
+        SaveUrlDB(imageUrl)
         const verification = await verificationFace.requestFace({ imageUrl });
-        console.log(verification)
         res.status(200).send(verification);
 
       }
