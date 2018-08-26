@@ -11,3 +11,5 @@ matrix:
       script:
         # Add upload heroku logic...
         - npm install
+        - git remote add heroku https://heroku:"$heroku"@git.heroku.com/artificial-inteligence-api.git
+        - git push -f heroku master
