@@ -8,8 +8,6 @@ const upload = multer({
 })
 
 export default (app) => {
-
   app.post('/api/verification',fileController.verificationController)
   app.post('/api/file', upload.array('files', 100), fileController.AddFile)
-
 }
