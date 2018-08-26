@@ -1,15 +1,16 @@
 'use strict'
-import {options} from '../utils/faceParams';
-import request from 'request';
-
+import { options, params } from '../utils/faceParams';
+import { getUrlParams } from '../utils/index';
+import fetch from 'node-fetch';
 const requestFace = async ({imageUrl}) =>{
     try {
-        const data = await request.post(options(imageUrl));
+        const response = await fetch(`${process.env.URL_API_AZURE}?${getUrlParams(params)}`, options(imageUrl));
+        const data = await response.json();
         return data;
     } catch (error) {
         throw new Error('MALPARIDO');
     }
 };
-export default{
+module.exports = {
     requestFace
 }

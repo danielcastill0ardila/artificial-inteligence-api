@@ -15,5 +15,6 @@ app.use(helmet())
 
 require('./routes/value.routes').default(app)
 
+require('./routes/file.routes').default(app)
 export default app
 
