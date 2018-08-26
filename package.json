@@ -1,0 +1,30 @@
+{
+  "name": "express-restapi-es6",
+  "version": "1.1.2",
+  "description": "Custom structure to build an REST API using Express.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "dev": "nodemon index.js --exec babel-node",
+    "test": "mocha test/*.test.js --spec --timeout 5000 --exit --compilers js:babel-core/register",
+    "test:nodemon": "nodemon test/value.test.js --exec mocha --compilers js:babel-core/register"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "celebrate": "^8.0.0",
+    "chalk": "^2.4.1",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.2.0",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.5"
+  }
+}
