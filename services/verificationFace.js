@@ -15,7 +15,7 @@ const requestFace = async ({ imageUrl }) => {
         return data;
         
     } catch (error) {
-        throw new Error('MALPARIDO');
+        throw new Error(error.message);
     }
 
 };
